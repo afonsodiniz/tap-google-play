@@ -17,7 +17,7 @@ def retriable_reviews(app_id, lang, country, sort, count, continuation_token):
     return reviews(
         app_id,
         lang = lang,
-        country = country,
+        # country = country,
         sort = Sort.NEWEST,
         count = 1000,
         continuation_token=continuation_token
@@ -69,7 +69,7 @@ class ReviewsStream(GooglePlayStream):
         results_dict = {}
 
         for lang in languages:
-            for country in countries:
+            # for country in countries:
                 self.logger.info(f"Getting reviews for {app_id} written in {lang} and from {country}.")
                 continuation_token = None
                 result = True
@@ -77,7 +77,7 @@ class ReviewsStream(GooglePlayStream):
                     result, continuation_token = retriable_reviews(
                         app_id,
                         lang = lang,
-                        country = country,
+                        # country = country,
                         sort = Sort.NEWEST,
                         count = 1000,
                         continuation_token=continuation_token
