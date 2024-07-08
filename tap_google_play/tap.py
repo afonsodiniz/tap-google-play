@@ -9,27 +9,30 @@ from tap_google_play import streams
 
 
 class TapGooglePlay(Tap):
-    """Singer tap for extracting data from the Google Play reviews."""
-
-    name = "tap-google-play"
+    """GooglePlay tap class."""
+    name = "tap-googleplay"
 
     config_jsonschema = th.PropertiesList(
         th.Property(
             "app_id",
             th.StringType,
-            description="The app ID to extract reviews from.",
+            required=True
         ),
         th.Property(
-            "app_id_list",
+            "countries",
             th.ArrayType(th.StringType),
-            description="A list of app IDs to extract reviews from.",
+            required=False
+        ),
+        th.Property(
+            "languages",
+            th.ArrayType(th.StringType),
+            required=False
         ),
         th.Property(
             "start_date",
             th.DateTimeType,
-            required=False,
-            description="The date to start extracting reviews from",
-        ),
+            required=False
+        )
     ).to_dict()
 
     def discover_streams(self) -> list[Stream]:
