@@ -26,7 +26,7 @@ def retriable_reviews(app_id, lang, country, sort, count, continuation_token):
 class ReviewsStream(GooglePlayStream):
     """Define custom stream."""
     name = "reviews"
-    primary_keys = ["id"]
+    primary_keys = ["reviewId"]
     replication_key = "at"
     schema = th.PropertiesList(
         th.Property("userName", th.StringType),
