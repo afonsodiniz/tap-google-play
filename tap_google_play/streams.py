@@ -40,13 +40,11 @@ class ReviewsStream(GooglePlayStream):
 
         for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
             self.logger.info("Getting reviews for %s", app_id)
-            app_details = app(app_id, lang="en", country="us")
+            app_details = app(app_id)  # Removed lang and country filters
             continuation_token = None
             while True:
                 result, continuation_token = reviews(
                     app_id,
-                    lang="en",
-                    country="us",
                     sort=Sort.NEWEST,
                     count=1000,
                     continuation_token=continuation_token,
