@@ -17,7 +17,7 @@ def retriable_reviews(app_id, lang, country, sort, count, continuation_token):
     return reviews(
         app_id,
         lang = lang,
-        # country = country,
+        country = country,
         sort = Sort.NEWEST,
         count = 1000,
         continuation_token=continuation_token
@@ -69,33 +69,33 @@ class ReviewsStream(GooglePlayStream):
         results_dict = {}
 
         for lang in languages:
-        # for country in countries:
-            self.logger.info(f"Getting reviews for {app_id} written in {lang}")
-            continuation_token = None
-            result = True
-            while result:
-                result, continuation_token = retriable_reviews(
-                    app_id,
-                    lang = lang,
-                    # country = country,
-                    sort = Sort.NEWEST,
-                    count = 1000,
-                    continuation_token=continuation_token
-                )
-                for record in result:
-                    if record["reviewId"] not in results_dict.keys():
-                        results_dict[record["reviewId"]] = record
-                
-                self.logger.info(f"{results_dict.values().__len__()} imported records so far.")
-            
-
-            if start_date:
-                filtered_results = []
-                for record in results_dict.values():
-                    if record.get('at') > start_date.replace(tzinfo=None): 
-                        filtered_results.append(record)
+            for country in countries:
+                self.logger.info(f"Getting reviews for {app_id} written in {lang}")
+                continuation_token = None
+                result = True
+                while result:
+                    result, continuation_token = retriable_reviews(
+                        app_id,
+                        lang = lang,
+                        country = country,
+                        sort = Sort.NEWEST,
+                        count = 1000,
+                        continuation_token=continuation_token
+                    )
+                    for record in result:
+                        if record["reviewId"] not in results_dict.keys():
+                            results_dict[record["reviewId"]] = record
                     
-                return filtered_results
+                    self.logger.info(f"{results_dict.values().__len__()} imported records so far.")
+                
+
+                if start_date:
+                    filtered_results = []
+                    for record in results_dict.values():
+                        if record.get('at') > start_date.replace(tzinfo=None): 
+                            filtered_results.append(record)
+                        
+                    return filtered_results
 
 
         return results_dict.values()
