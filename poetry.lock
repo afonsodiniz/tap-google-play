@@ -760,6 +760,20 @@ files = [
 ]
 
 [[package]]
+name = "pycountry"
+version = "24.6.1"
+description = "ISO country, subdivision, language, currency and script definitions and their translations"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pycountry-24.6.1-py3-none-any.whl", hash = "sha256:f1a4fb391cd7214f8eefd39556d740adcc233c778a27f8942c8dca351d6ce06f"},
+    {file = "pycountry-24.6.1.tar.gz", hash = "sha256:b61b3faccea67f87d10c1f2b0fc0be714409e8fcdcc1315613174f6466c10221"},
+]
+
+[package.dependencies]
+importlib-resources = {version = ">5.12.0", markers = "python_version < \"3.9\""}
+
+[[package]]
 name = "pycparser"
 version = "2.21"
 description = "C parser in Python"
@@ -1400,4 +1414,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "0cc1006e55d9036994f9e3feeb4d8cf426c1ac3ab76ffc70a609fc80315296e6"
+content-hash = "de58c8ec2a94f82591d51d05682869c36808509cba80dc08ce0c128ed5b7a297"
