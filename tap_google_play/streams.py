@@ -41,6 +41,7 @@ class ReviewsStream(GooglePlayStream):
         for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
             self.logger.info("Getting reviews for %s", app_id)
             app_details = app(app_id)  # Removed lang and country filters
+            print(app_details)
             continuation_token = None
             while True:
                 result, continuation_token = reviews(
