@@ -70,7 +70,7 @@ class ReviewsStream(GooglePlayStream):
 
         for lang in languages:
         # for country in countries:
-            self.logger.info(f"Getting reviews for {app_id} written in {lang} and from {country}.")
+            self.logger.info(f"Getting reviews for {app_id} written in {lang}")
             continuation_token = None
             result = True
             while result:
