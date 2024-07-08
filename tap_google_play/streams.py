@@ -69,24 +69,24 @@ class ReviewsStream(GooglePlayStream):
         results_dict = {}
 
         for lang in languages:
-            # for country in countries:
-                self.logger.info(f"Getting reviews for {app_id} written in {lang} and from {country}.")
-                continuation_token = None
-                result = True
-                while result:
-                    result, continuation_token = retriable_reviews(
-                        app_id,
-                        lang = lang,
-                        # country = country,
-                        sort = Sort.NEWEST,
-                        count = 1000,
-                        continuation_token=continuation_token
-                    )
-                    for record in result:
-                        if record["reviewId"] not in results_dict.keys():
-                            results_dict[record["reviewId"]] = record
-                    
-                    self.logger.info(f"{results_dict.values().__len__()} imported records so far.")
+        # for country in countries:
+            self.logger.info(f"Getting reviews for {app_id} written in {lang} and from {country}.")
+            continuation_token = None
+            result = True
+            while result:
+                result, continuation_token = retriable_reviews(
+                    app_id,
+                    lang = lang,
+                    # country = country,
+                    sort = Sort.NEWEST,
+                    count = 1000,
+                    continuation_token=continuation_token
+                )
+                for record in result:
+                    if record["reviewId"] not in results_dict.keys():
+                        results_dict[record["reviewId"]] = record
+                
+                self.logger.info(f"{results_dict.values().__len__()} imported records so far.")
             
 
             if start_date:
